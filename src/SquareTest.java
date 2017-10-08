@@ -13,5 +13,6 @@ public class SquareTest
     {
         MagicSquare mySquare = new MagicSquare(3);
         System.out.println(mySquare.toString());
+        System.out.println(mySquare.printTheOutside());
     }
 }

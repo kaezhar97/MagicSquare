@@ -28,17 +28,20 @@ The assignment is to create a class to model a magic square and a class that tes
 
 I. The MagicSquare Class
 
-Your magic square class constructor will have a parameter for N (the number of rows and columns) and will call a private “utility” method that fills the square with the integers 1 to N.
+Your magic square class constructor will have a parameter for N (the number of rows and columns) and will call a private “utility” method that fills 
+the square with the integers 1 to N.
 
 Your class will contain 2 additional methods:
 
-A method that returns a value of true or false indicating whether the square created is indeed magic.  That is, whether all the sums – those of each individual row and column and of both diagonals – are equal.  (Hint: for an N by N matrix, how many sums must be tested?)
+A method that returns a value of true or false indicating whether the square created is indeed magic.  That is, whether all the sums – those of each 
+individual row and column and of both diagonals – are equal.  (Hint: for an N by N matrix, how many sums must be tested?)
 
 A toString method that returns the magic square as a multi-line string, as shown above.
 
 II. The Test Class
 
-Your test class will get the number of rows and columns from the user, create a magic square object, and call the method that tests whether the square is truly magical.  If so, it will call the toString method and print the square; otherwise, an error message should be printed.
+Your test class will get the number of rows and columns from the user, create a magic square object, and call the method that tests whether the 
+square is truly magical.  If so, it will call the toString method and print the square; otherwise, an error message should be printed.
 Use a loop to ensure that your program accepts only positive, odd-numbered values for N
 
 
@@ -56,13 +59,16 @@ If the attempt leads to a non-existent row, then the number is placed instead in
 
 If the attempt leads to a non-existent column, then the number is placed instead in the first column, one row down.
 
-If the attempt leads to a non-existent row and a non-existent column, then the number is placed instead in the position directly above the previous number (i.e., same column, previous row).
+If the attempt leads to a non-existent row and a non-existent column, then the number is placed instead in the position directly above the 
+previous number (i.e., same column, previous row).
 
-If the attempt leads to a position that is not empty (i.e., already contains a value), then the number is placed instead in the position directly above the previous number.
+If the attempt leads to a position that is not empty (i.e., already contains a value), then the number is placed instead in the position directly
+ above the previous number.
 
 No credit will be given for programs that use any algorithm to generate the square other than the one described above
 
-Although you will not generate the Javadoc “help” pages for this assignment, make sure your program is properly documented (both internal and Javadoc) and adheres to all the style conventions discussed in class and in Unit 1.
+Although you will not generate the Javadoc “help” pages for this assignment, make sure your program is 
+properly documented (both internal and Javadoc) and adheres to all the style conventions discussed in class and in Unit 1.
 
 What to upload:
 
