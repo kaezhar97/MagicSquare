@@ -38,11 +38,11 @@ public class MagicSquare
         currentColumn=(numberOfRowsAndColumns-1)/2;
         square[currentRow][currentColumn]=1;
         
-        for (int i=2;i<lastNumber;i++)
+        for (int i=2;i<=lastNumber;i++)
         {
             nextRow=currentRow+1;
             nextColumn=currentColumn+1;
- 
+            
             if (nextRow>=N)
             {
               square[0][nextColumn]=i;
@@ -52,21 +52,29 @@ public class MagicSquare
             }
             else if (nextColumn>=N)
             {
-                square[nextRow][nextColumn]=i;
+                square[nextRow][0]=i;
+                currentRow=nextRow;
+                currentColumn=0;
             }
             else if((nextRow>=N)&&(nextColumn>=N))
             {
-                
+                square[currentRow-1][currentColumn]=i;
+                currentRow=currentRow-1;
+                currentColumn=currentColumn;
             }
             else if (!isEmptyAtPosition(nextRow,nextColumn))
             {
-                
+                square[currentRow-1][currentColumn]=i;
+                currentRow=currentRow-1;
+                currentColumn=currentColumn;
             }
             else
             {
                 square[nextRow][nextColumn]=i;
                 currentRow=nextRow;
                 currentColumn=nextColumn;
+                
+                
             }
             
           
