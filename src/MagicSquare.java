@@ -32,18 +32,58 @@ public class MagicSquare
     
     private void fill()
     {
+        int lastNumber=N*N;
         
-        nextRow=numberOfRowsAndColumns-1;
-        nextColumn=(numberOfRowsAndColumns-1)/2;
+        currentRow=numberOfRowsAndColumns-1;
+        currentColumn=(numberOfRowsAndColumns-1)/2;
+        square[currentRow][currentColumn]=1;
         
-        
-        for (int i=1;i<=(N*N);i++)
+        for (int i=2;i<lastNumber;i++)
         {
-            square[nextRow][nextColumn]=1;
+            nextRow=currentRow+1;
+            nextColumn=currentColumn+1;
+ 
+            if (nextRow>=N)
+            {
+              square[0][nextColumn]=i;
+              currentRow=0;
+              currentColumn=nextColumn;
             
-               // nextRow++;
-               // nextColumn++;
+            }
+            else if (nextColumn>=N)
+            {
+                square[nextRow][nextColumn]=i;
+            }
+            else if((nextRow>=N)&&(nextColumn>=N))
+            {
+                
+            }
+            else if (!isEmptyAtPosition(nextRow,nextColumn))
+            {
+                
+            }
+            else
+            {
+                square[nextRow][nextColumn]=i;
+                currentRow=nextRow;
+                currentColumn=nextColumn;
+            }
+            
+          
+ 
         }
+    }
+    
+    public boolean isEmptyAtPosition(int x,int y)
+    {
+        boolean emptyOrNot=true;
+        
+        if (square[x][y]!=0)
+        {
+            emptyOrNot=false;
+        }
+        
+        return emptyOrNot;
     }
     
     public String toString()
