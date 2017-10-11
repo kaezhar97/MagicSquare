@@ -1,114 +1,110 @@
 /**
+ * File: MagicSquare.java
  * 
+ *  Purpose: To simulate a magic square where each row, column and diagonal adds up to the same value
  */
 
 /**
  *A class that simulates a Magic Square with N number of rows and columns.
  * 
- * @author Octavio
+ * @author Octavio Avila Cardet 5699410
  */
 public class MagicSquare
 {
-    private int[][] square; 
-    private int[][] theOutside;
-    private int numberOfRowsAndColumns;
-    private int nextRow;
-    private int nextColumn;
-    private int currentRow;
-    private int currentColumn;
-    private int N;
+    private int[][] square; //a the magic square container
+    private int numberOfRowsAndColumns; //the number of rows and columns
+    private int nextRow; //the next row to fill
+    private int nextColumn; // the next column to fill
+    private int currentRow; // the current filled row
+    private int currentColumn; // the current filled column
+    private int N; //the number of rows and columns
     
             
-    
+    /**
+     * Creates a magic square
+     * @param N the number of rows and columns
+     */
     public MagicSquare(int N)
     {
-        System.out.println("[DEBUGGING]: Creating MagicSquare object");
+       
         this.N=N;
         square=new int[N][N];
-        theOutside=new int[N+2][N+2];
         numberOfRowsAndColumns=N;
         fill();
     }
     
    
-    
+    /**
+     * Fills up the square with numbers
+     */
     private void fill()
     {
-        System.out.println("[DEBUGGING]: Called fill method");
+       
         int lastNumber=N*N;
         
-        System.out.println("[DEBUGGING]: The highest number in the square is "+lastNumber);
-        
+     
         currentRow=numberOfRowsAndColumns-1;
         currentColumn=(numberOfRowsAndColumns-1)/2;
         square[currentRow][currentColumn]=1;
         
-        System.out.println("[DEBUGGING]: The first current row is "+currentRow);
-        System.out.println("[DEBUGGING]: The first current column is "+currentColumn);
-        System.out.println("[DEBUGGING]: There is a "+1+" in this position");
+
         
         for (int i=2;i<=lastNumber;i++)
         {
             nextRow=currentRow+1;
             nextColumn=currentColumn+1;
             
-            System.out.println("[DEBUGGING]: The next row is "+nextRow);
-            System.out.println("[DEBUGGING]: The next column is "+nextColumn);
+        
             
             if((nextRow>=N)&&(nextColumn>=N))
             {
-                System.out.println("[DEBUGGING]: The next column and row are both bigger than "+N+" therefore, neither the row nor the column exist. We have to put "+i+" directly above the previous number");
+              
                 square[currentRow-1][currentColumn]=i;
                 currentRow=currentRow-1;
                 currentColumn=currentColumn;
                 
-              System.out.println("[DEBUGGING]: The current row is now "+currentRow);
-              System.out.println("[DEBUGGING]: The current column is now "+currentColumn);
+        
             }
             else if (nextRow>=N)
             {
-              System.out.println("[DEBUGGING]: The next row is bigger than "+N+" therefore, the column exists but the row doesn't. We have to put "+i+" in the first row, one column to the right");
+             
               square[0][nextColumn]=i;
               
               currentRow=0;
               currentColumn=nextColumn;
               
-              System.out.println("[DEBUGGING]: The current row is now "+currentRow);
-              System.out.println("[DEBUGGING]: The current column is now "+currentColumn);
+          
             
             }
             else if (nextColumn>=N)
             {
                 
-                System.out.println("[DEBUGGING]: The next column is bigger than "+N+" therefore, the row exists but the column does not. We have to put "+i+" in the first column, one row down");
+         
                 
                 square[nextRow][0]=i;
                 currentRow=nextRow;
                 currentColumn=0;
                 
-              System.out.println("[DEBUGGING]: The current row is now "+currentRow);
-              System.out.println("[DEBUGGING]: The current column is now "+currentColumn);
+            
             }
           
             else if (!isEmptyAtPosition(nextRow,nextColumn))
             {
-                System.out.println("[DEBUGGING]: The next position is not empty. We have to put "+i+" directly above the previous number");
+              
                 square[currentRow-1][currentColumn]=i;
                 currentRow=currentRow-1;
                 currentColumn=currentColumn;
                 
-              System.out.println("[DEBUGGING]: The current row is now "+currentRow);
-              System.out.println("[DEBUGGING]: The current column is now "+currentColumn);
+             
             }
             else
             {
-                System.out.println("[DEBUGGING]: The next position is empty, we can place "+i+" there without problems");
+             
                 square[nextRow][nextColumn]=i;
                 currentRow=nextRow;
                 currentColumn=nextColumn;
                 
-              System.out.println("[DEBUGGING]: The current row is now "+currentRow);
-              System.out.println("[DEBUGGING]: The current column is now "+currentColumn);
+            
                 
                 
             }
@@ -118,6 +114,13 @@ public class MagicSquare
         }
     }
     
+    /**
+     * Checks if a position in the square is empty
+     * 
+     * @param x the row
+     * @param y the column
+     * @return status of the position (empty or not)
+     */
     public boolean isEmptyAtPosition(int x,int y)
     {
         boolean isEmpty=false;
@@ -130,6 +133,66 @@ public class MagicSquare
         return isEmpty;
     }
     
+    /**
+     * Checks if the square is magic. The square is magic if every row, column, and diagonal add up to the same number
+     * 
+     * @return whether or not the square is magic
+     */
+    public boolean isMagic()
+    {
+        boolean itIsMagic=false;
+        int sum=0;
+        int newSum=0;
+        
+        for (int i=0;i<N;i++)
+        {
+            sum+=square[0][i];
+        }
+        
+        for (int j=0;j<N;j++)
+        {
+            for (int k=0;k<N;k++)
+            {
+                newSum+=square[j][k];
+            }
+        }
+        
+        for (int j=0;j<N;j++)
+        {
+            for (int k=0;k<N;k++)
+            {
+                newSum+=square[k][j];
+            }
+        }
+        
+       
+            for (int n=0;n<N;n++)
+            {
+              newSum+=square[n][n];
+            }
+            
+            int s=0;
+            for (int m=N-1;(m>-1&&s<N);m--)
+            {
+               newSum+=square[s][m]; 
+               s++;
+            }
+        
+        
+    
+        if ((newSum/(sum)==(N+N)+2))
+        {
+            itIsMagic=true;
+        }
+        
+        return itIsMagic;
+    }
+    
+    /**
+     * Returns a visual representation of the magic square
+     * 
+     * @return the actual magic square
+     */
     public String toString()
     {
         String squareToString="\n";
@@ -144,7 +207,7 @@ public class MagicSquare
                 {
                     if (j!=(square[i].length)-1)
                     {
-                        squareToString+=square[i][j]+"  ";
+                        squareToString+=square[i][j]+" ";
                     }
                 
                     else
@@ -152,7 +215,7 @@ public class MagicSquare
                         squareToString+=square[i][j];
                     }
                   }
-                  squareToString+="\n";
+                  squareToString+=" \n";
                 }
                 else
                 {
@@ -160,7 +223,7 @@ public class MagicSquare
                       {
                         if (j!=(square[i].length)-1)
                         {
-                            squareToString+=square[i][j]+"  ";
+                            squareToString+=square[i][j]+" ";
                         }
                 
                         else
@@ -168,7 +231,7 @@ public class MagicSquare
                             squareToString+=square[i][j];
                         }
                     }
-                    squareToString+="\n";
+                    squareToString+=" \n";
                 }
             }
         
